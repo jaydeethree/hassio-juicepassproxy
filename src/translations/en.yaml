@@ -1,0 +1,42 @@
+---
+configuration:
+  mqtt_host:
+    name: MQTT Host
+    description: >-
+      The IP address of your MQTT server.
+  mqtt_port:
+    name: MQTT Port
+    description: >-
+      The port that your MQTT server listens on.
+  mqtt_username:
+    name: MQTT Username
+    description: >-
+      Your MQTT username.
+  mqtt_password:
+    name: MQTT Password
+    description: >-
+      Your MQTT password.
+  ignore_enelx:
+    name: Ignore EnelX
+    description: >-
+      If enabled, will not send commands received from EnelX to the JuiceBox nor send outgoing information from the JuiceBox to EnelX.
+  update_udpc:
+    name: Update UDPC
+    description: >-
+      If enabled, will continually update the JuiceBox via telnet to point to JuicePass Proxy. Do not enable this if you are using your router to redirect traffic to JuicePass Proxy.
+  juicebox_host:
+    name: JuiceBox Host
+    description: >-
+      The IP address of your JuiceBox. If defined, will attempt to get the EnelX Server Name, IP, and Port using telnet. Required if Update UDPC is enabled.
+  jpp_host:
+    name: JuicePass Proxy Host
+    description: >-
+      The IP address of JuicePass Proxy (this should be the same as your Home Assistant IP). Required if Update UDPC is enabled.
+  juicebox_id:
+    name: JuiceBox ID
+    description: >-
+      The serial number of your JuiceBox. If not defined, will attempt to get the JuiceBox ID using telnet. Don't use this if you are testing multiple devices.
+  debug:
+    name: Debug
+    description: >-
+      If enabled, JuicePass Proxy will show additional log entries that can be helpful for debugging.
