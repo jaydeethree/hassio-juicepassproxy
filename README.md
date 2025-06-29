@@ -9,6 +9,7 @@ You will need to add this repository to Home Assistant to install this add-on. H
 * Go to Settings > Add-ons > Add-on Store in Home Assistant
 * Open the menu (three dots in the upper-right) and choose "Repositories"
 * Enter `https://github.com/jaydeethree/hassio-juicepassproxy` into the text box and click the Add button
+* Close the "Repositories" window, go back to the Add-on Store, and install the JuicePassProxy add-on.
 
 # Using the add-on
 
