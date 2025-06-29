@@ -18,3 +18,18 @@ If you are using DNS spoofing or NAT to redirect traffic then the following conf
 * JuicePassProxy Host: The IP address of your Home Assistant instance that's running this add-on.
 
 No matter which mode you use, you will also need to configure the MQTT options so that JuicePassProxy can send data to Home Assistant.
+
+# Setting up NAT redirection
+
+Instructions for setting up NAT redirection for different router platforms are below. Feel free to send PRs to add instructions for your router platform.
+
+**All instructions below use 192.168.1.111 as the IP of the JuiceBox and 192.168.1.222 as the IP of Home Assistant (where this add-on is running). You will need to change these to match your actual JuiceBox and Home Assistant IPs.**
+
+## OPNSense
+
+* Go to Firewall > NAT > Port Forward, and create a new rule as follows:
+  ![port forward](https://raw.githubusercontent.com/jaydeethree/hassio-juicepassproxy/refs/heads/main/images/opnsense1.png)
+* Now go to Firewall > NAT > Outbound, and create a new rule as follows:
+  ![outbound](https://raw.githubusercontent.com/jaydeethree/hassio-juicepassproxy/refs/heads/main/images/opnsense2.png)
+
+Don't forget to apply the changes!
