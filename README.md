@@ -1,10 +1,16 @@
-**IMPORTANT:** This is under active development and is not ready to use yet. Please be patient - I expect to have a stable release ready in July 2025.
-
 [JuicePassProxy](https://github.com/JuiceRescue/juicepassproxy) as a Home Assistant add-on.
 
 This project is **NOT** affiliated with JuicePassProxy or the JuiceRescue Organization - this is an unofficial add-on.
 
-# How to Use
+# Installing the add-on
+
+You will need to add this repository to Home Assistant to install this add-on. Here's how to do that:
+
+* Go to Settings > Add-ons > Add-on Store in Home Assistant
+* Open the menu (three dots in the upper-right) and choose "Repositories"
+* Enter `https://github.com/jaydeethree/hassio-juicepassproxy` into the text box and click the Add button
+
+# Using the add-on
 
 To start, read [the JuicePassProxy README](https://github.com/JuiceRescue/juicepassproxy) to learn more about the project and what it's capable of. JuicePassProxy provides three different modes of operation - while the UDPC mode is easiest to set up, it should only be used as a last resort because it's significantly less reliable than the other options. It is strongly recommended that you use either DNS spoofing or NAT since those modes are more reliable.
 
