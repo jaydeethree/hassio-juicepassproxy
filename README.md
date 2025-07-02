@@ -22,6 +22,7 @@ If you are using DNS spoofing or NAT to redirect traffic then the following conf
 * Ignore EnelX: True
 * Update UDPC: False
 * Juicebox ID: The serial number of your Juicebox. If you don't know the serial number you can telnet into your Juicebox on port 2000 and run the command `get email.name_address` to retrieve it. Yes, really - `get email.name_address` is how you get the serial number.
+  * Note: Home Assistant hides this by default, so you need to enable "Show unused optional configuration options" to see this option.
 
 No matter which mode you use, you will also need to configure the MQTT options so that JuicePassProxy can send data to Home Assistant.
 
