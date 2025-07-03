@@ -30,7 +30,7 @@ No matter which mode you use, you will also need to configure the MQTT options s
 
 Instructions for setting up NAT redirection for different router platforms are below. Feel free to send PRs to add instructions for your router platform.
 
-**All instructions below use 192.168.1.111 as the IP of the JuiceBox and 192.168.1.222 as the IP of Home Assistant (where this add-on is running). You will need to change these to match your actual JuiceBox and Home Assistant IPs.**
+**All instructions below use 192.168.2.111 as the IP of the JuiceBox and 192.168.1.222 as the IP of Home Assistant (where this add-on is running). You will need to change these to match your actual JuiceBox and Home Assistant IPs.**
 
 ## OPNSense
 
