@@ -34,9 +34,9 @@ Instructions for setting up NAT redirection for different router platforms are b
 
 ## OPNSense
 
-* Go to Firewall > NAT > Port Forward, and create a new rule as follows:
+* Go to Firewall > NAT > Port Forward and create a new rule. **"Interface" should be the network interface that your JuiceBox is connected to.** The rest of the options should be configured like this:
   ![port forward](https://raw.githubusercontent.com/jaydeethree/hassio-juicepassproxy/refs/heads/main/images/opnsense1.png)
-* Now go to Firewall > NAT > Outbound, and create a new rule as follows:
+* Now go to Firewall > NAT > Outbound and create a new rule. **"Interface" should be the network interface that your JuiceBox is connected to.** The rest of the options should be configured like this:
   ![outbound](https://raw.githubusercontent.com/jaydeethree/hassio-juicepassproxy/refs/heads/main/images/opnsense2.png)
 
 Don't forget to apply the changes!
