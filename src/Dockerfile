@@ -1,4 +1,4 @@
-FROM ghcr.io/home-assistant/amd64-base-python:3.12-alpine3.21
+FROM ghcr.io/home-assistant/amd64-base-python:sha256-34553d4cc48963d4981ba121e2517a64ad7cba6cd450eaeda275faf19bed0abb.sig
 
 ENV DEBUG=false
 
