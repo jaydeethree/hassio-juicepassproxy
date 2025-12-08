@@ -1,3 +1,6 @@
+## 0.5.1.07
+- Bump base image to [2025.12.0](https://github.com/home-assistant/docker-base/releases/tag/2025.12.0)
+
 ## 0.5.1.06
 - Bump base image to [2025.11.1](https://github.com/home-assistant/docker-base/releases/tag/2025.11.1)
 
