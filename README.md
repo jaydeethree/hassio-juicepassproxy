@@ -1,21 +1,21 @@
-[JuicePassProxy](https://github.com/JuiceRescue/juicepassproxy) as a Home Assistant add-on.
+[JuicePassProxy](https://github.com/JuiceRescue/juicepassproxy) as a Home Assistant ~~add-on~~ app.
 
-This project is **NOT** affiliated with JuicePassProxy or the JuiceRescue Organization - this is an unofficial add-on.
+This project is **NOT** affiliated with JuicePassProxy or the JuiceRescue Organization - this is an unofficial ~~add-on~~ app.
 
-# Installing the add-on
+# Installing the app
 
-You will need to add this repository to Home Assistant to install this add-on. Here's how to do that:
+You will need to add this repository to Home Assistant to install this app. Here's how to do that:
 
-* Go to Settings > Add-ons > Add-on Store in Home Assistant
+* Go to Settings > Apps > Install App in Home Assistant
 * Open the menu (three dots in the upper-right) and choose "Repositories"
 * Enter `https://github.com/jaydeethree/hassio-juicepassproxy` into the text box and click the Add button
-* Close the "Repositories" window, go back to the Add-on Store, and install the JuicePassProxy add-on.
+* Close the "Repositories" window and install the JuicePassProxy app.
 
-# Using the add-on
+# Using the app
 
 To start, read [the JuicePassProxy README](https://github.com/JuiceRescue/juicepassproxy) to learn more about the project and what it's capable of. JuicePassProxy provides three different modes of operation - while the UDPC mode is easiest to set up, it should only be used as a last resort because it's significantly less reliable than the other options. It is strongly recommended that you use either DNS spoofing or NAT since those modes are more reliable.
 
-Most JuicePassProxy options are exposed in this add-on's configuration page. If you need more information about what an option does, please check [the JuicePassProxy README](https://github.com/JuiceRescue/juicepassproxy).
+Most JuicePassProxy options are exposed in this app's configuration page. If you need more information about what an option does, please check [the JuicePassProxy README](https://github.com/JuiceRescue/juicepassproxy).
 
 If you are using DNS spoofing or NAT to redirect traffic then the following configuration is recommended:
 
@@ -30,7 +30,7 @@ No matter which mode you use, you will also need to configure the MQTT options s
 
 Instructions for setting up NAT redirection for different router platforms are below. Feel free to send PRs to add instructions for your router platform.
 
-**All instructions below use 192.168.2.111 as the IP of the JuiceBox and 192.168.1.222 as the IP of Home Assistant (where this add-on is running). You will need to change these to match your actual JuiceBox and Home Assistant IPs.**
+**All instructions below use 192.168.2.111 as the IP of the JuiceBox and 192.168.1.222 as the IP of Home Assistant (where this app is running). You will need to change these to match your actual JuiceBox and Home Assistant IPs.**
 
 ## OPNSense
 
