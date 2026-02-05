@@ -3,6 +3,7 @@
 - Update Python from 3.12 to 3.13
 - Drop support for `armhf`, `armv7`, and `i386` architectures since they're no longer supported by Home Assistant
 - Bump base images to [2026.02.0](https://github.com/home-assistant/docker-base/releases/tag/2026.02.0)
+- Added Dependabot and bumped versions for several dependencies
 
 ## 0.5.1.07
 - Bump base image to [2025.12.0](https://github.com/home-assistant/docker-base/releases/tag/2025.12.0)
