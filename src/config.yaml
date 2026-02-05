@@ -7,11 +7,8 @@ ports:
   "8047/udp": 8047
 panel_icon: mdi:ev-station
 arch:
-  - armhf
-  - armv7
   - aarch64
   - amd64
-  - i386
 discovery:
   - mqtt
 services:
