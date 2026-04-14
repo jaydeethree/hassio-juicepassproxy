@@ -1,3 +1,6 @@
+## 0.5.1.09
+- Bump base images to [2026.04.0](https://github.com/home-assistant/docker-base/releases/tag/2026.04.0)
+
 ## 0.5.1.08
 - Update base image from Alpine 3.21 to Alpine 3.22
 - Update Python from 3.12 to 3.13
