@@ -1,3 +1,6 @@
+## 0.5.1.10
+- Migrate to new Home Assistant builder (https://developers.home-assistant.io/blog/2026/04/02/builder-migration/)
+
 ## 0.5.1.09
 - Bump base images to [2026.04.0](https://github.com/home-assistant/docker-base/releases/tag/2026.04.0)
 

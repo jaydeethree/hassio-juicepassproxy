@@ -1,5 +1,4 @@
-ARG BUILD_FROM
-FROM ${BUILD_FROM}
+FROM ghcr.io/home-assistant/base-python:3.13-alpine3.22
 
 ENV DEBUG=false
 
