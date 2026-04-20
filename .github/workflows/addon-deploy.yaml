@@ -4,10 +4,6 @@ name: Deploy
 on:
   workflow_dispatch:
 
-env:
-  ARCHITECTURES: '["amd64", "aarch64"]'
-  IMAGE_NAME: hassio-juicepassproxy
-
 permissions:
   contents: read
 
@@ -16,15 +12,44 @@ jobs:
     name: Initialize build
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.matrix.outputs.matrix }}
+      architectures: ${{ steps.info.outputs.architectures }}
+      build_matrix: ${{ steps.matrix.outputs.matrix }}
+      image_name: ${{ steps.normalize.outputs.image_name }}
+      name: ${{ steps.normalize.outputs.name }}
+      description: ${{ steps.normalize.outputs.description }}
+      url: ${{ steps.normalize.outputs.url }}
+      registry_prefix: ${{ steps.normalize.outputs.registry_prefix }}
+      version: ${{ steps.normalize.outputs.version }}
     steps:
       - uses: actions/checkout@v6
+      - name: Get information
+        id: info
+        uses: home-assistant/actions/helpers/info@master
+        with:
+          path: "./src"
+      - name: Normalize app information
+        id: normalize
+        run: |
+          image=${{ steps.info.outputs.image }}
+          echo "image_name=${image##*/}" >> "$GITHUB_OUTPUT"
+          echo "registry_prefix=${image%/*}" >> "$GITHUB_OUTPUT"
+          version=${{ steps.info.outputs.version }}
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          name=${{ steps.info.outputs.name }}
+          echo "name=${name}" >> "$GITHUB_OUTPUT"
+          description=${{ steps.info.outputs.description }}
+          echo "description=${description}" >> "$GITHUB_OUTPUT"
+          url=${{ steps.info.outputs.url }}
+          if [[ -n "$url" && "$url" != "null" ]]; then
+            echo "url=${url}" >> "$GITHUB_OUTPUT"
+          fi
       - name: Get build matrix
         id: matrix
         uses: home-assistant/builder/actions/prepare-multi-arch-matrix@2026.03.2
         with:
-          architectures: ${{ env.ARCHITECTURES }}
-          image-name: ${{ env.IMAGE_NAME }}
+          architectures: ${{ steps.info.outputs.architectures }}
+          image-name: ${{ steps.normalize.outputs.image_name }}
+          registry-prefix: ${{ steps.normalize.outputs.registry_prefix }}
 
   build:
     name: Build ${{ matrix.arch }} image
@@ -36,14 +61,9 @@ jobs:
       packages: write # To push built images to GitHub Container Registry
     strategy:
       fail-fast: false
-      matrix: ${{ fromJSON(needs.init.outputs.matrix) }}
+      matrix: ${{ fromJSON(needs.prepare.outputs.build_matrix) }}
     steps:
       - uses: actions/checkout@v6
-      - name: Get information
-        id: info
-        uses: home-assistant/actions/helpers/info@master
-        with:
-          path: "./src"
       - name: Build image
         uses: home-assistant/builder/actions/build-image@2026.03.2
         with:
@@ -51,10 +71,15 @@ jobs:
           container-registry-password: ${{ secrets.GITHUB_TOKEN }}
           image: ${{ matrix.image }}
           image-tags: |
-            ${{ steps.info.outputs.version }}
+            ${{ needs.prepare.outputs.version }}
             latest
+          labels: |
+            io.hass.type=addon
+            io.hass.name=${{ needs.prepare.outputs.name }}
+            io.hass.description=${{ needs.prepare.outputs.description }}
+            ${{ needs.prepare.outputs.url && format('io.hass.url={0}', needs.prepare.outputs.url) || '' }}
           push: "true"
-          version: ${{ steps.info.outputs.version }}
+          version: ${{ needs.prepare.outputs.version }}
 
   manifest:
     name: Publish multi-arch manifest
@@ -64,17 +89,13 @@ jobs:
       id-token: write # Write needed for Cosign signing (issue OIDC token for signing)
       packages: write # To push the manifest to GitHub Container Registry
     steps:
-      - name: Get information
-        id: info
-        uses: home-assistant/actions/helpers/info@master
-        with:
-          path: "./src"
       - name: Publish multi-arch manifest
         uses: home-assistant/builder/actions/publish-multi-arch-manifest@2026.03.2
         with:
-          architectures: ${{ env.ARCHITECTURES }}
+          architectures: ${{ needs.prepare.outputs.architectures }}
           container-registry-password: ${{ secrets.GITHUB_TOKEN }}
-          image-name: ${{ env.IMAGE_NAME }}
+          image-name: ${{ needs.prepare.outputs.image_name }}
           image-tags: |
-            ${{ steps.info.outputs.version }}
+            ${{ needs.prepare.outputs.version }}
             latest
+          registry-prefix: ${{ needs.prepare.outputs.registry_prefix }}
