@@ -9,6 +9,7 @@ export JUICEBOX_HOST="$(bashio::config 'juicebox_host')"
 export JUICEBOX_ID="$(bashio::config 'juicebox_id')"
 export UPDATE_UDPC="$(bashio::config 'update_udpc')"
 export JPP_HOST="$(bashio::config 'jpp_host')"
+export EXPERIMENTAL="$(bashio::config 'experimental')"
 export DEBUG="$(bashio::config 'debug')"
 
 /juicepassproxy/docker_entrypoint.sh

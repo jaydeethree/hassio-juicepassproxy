@@ -36,6 +36,10 @@ configuration:
     name: JuiceBox ID
     description: >-
       The serial number of your JuiceBox. If not defined, will attempt to get the JuiceBox ID using telnet. Don't use this if you are testing multiple devices.
+  experimental:
+    name: Experimental
+    description: >-
+      Enables additional entities in Home Assistant that are in in development or can be used toward developing the ability to send commands to a JuiceBox.
   debug:
     name: Debug
     description: >-

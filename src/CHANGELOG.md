@@ -1,3 +1,6 @@
+## 0.5.1.11
+- Add an option to enable the `experimental` flag for JuicePassProxy (https://github.com/jaydeethree/hassio-juicepassproxy/issues/6)
+
 ## 0.5.1.10
 - Migrate to new Home Assistant builder (https://developers.home-assistant.io/blog/2026/04/02/builder-migration/)
 
