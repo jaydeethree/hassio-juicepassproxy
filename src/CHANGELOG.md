@@ -1,3 +1,6 @@
+## 0.5.1.12
+- Bump base images to [2026.05.0](https://github.com/home-assistant/docker-base/releases/tag/2026.05.0)
+
 ## 0.5.1.11
 - Add an option to enable the `experimental` flag for JuicePassProxy (https://github.com/jaydeethree/hassio-juicepassproxy/issues/6)
 
