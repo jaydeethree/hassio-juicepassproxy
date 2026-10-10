@@ -2,8 +2,6 @@
 
 This project is **NOT** affiliated with JuicePassProxy or the JuiceRescue Organization - this is an unofficial ~~add-on~~ app.
 
--------------------
-
 # AI Disclosure
 
 Starting in October 2026 I will begin using AI to help me maintain my open-source projects. I know a lot of people have strong feelings about AI so I want to be open about this decision and why I made it.
@@ -15,8 +13,6 @@ I've been using AI in my job for awhile and have found that while human oversigh
 To be very clear: **any AI-generated code that gets committed to my open-source projects will be thoroughly reviewed by me, a human.** I'm not vibe-coding or letting AIs run wild in my repositories, I'm using AI as a tool to help me work more efficiently. If you disagree with this you are always welcome to fork my projects and build non-AI versions of them.
 
 Also for what it's worth: 100% of this disclosure was written by a human without any AI involvement :)
-
--------------------
 
 # Installing the app
 
