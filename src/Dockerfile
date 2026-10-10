@@ -1,4 +1,4 @@
-FROM ghcr.io/home-assistant/base-python:3.13-alpine3.22-2026.08.0
+FROM ghcr.io/home-assistant/base-python:3.13-alpine3.22-2026.10.0
 
 ENV DEBUG=false
 
