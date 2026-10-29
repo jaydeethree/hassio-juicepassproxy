@@ -1,3 +1,6 @@
+## 0.5.1.16
+- Hotfix release for https://github.com/jaydeethree/hassio-juicepassproxy/issues/20
+
 ## 0.5.1.15
 - Bump base images to [2026.10.0](https://github.com/home-assistant/docker-base/releases/tag/2026.10.0)
 
