@@ -49,4 +49,4 @@ configuration:
     description: >-
       If enabled, JuicePass Proxy will show additional log entries that can be helpful for debugging.
 network:
-  "8047/udp": JuiceBox UDP telemetry proxy port
+  "8047/udp": JuiceBox UDP proxy port
