@@ -6,3 +6,9 @@ updates:
       interval: "weekly"
     labels:
       - "dependency-update"
+  - package-ecosystem: "docker"
+    directory: "/src"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependency-update"
