@@ -24,6 +24,10 @@ configuration:
     name: Update UDPC
     description: >-
       If enabled, will continually update the JuiceBox via telnet to point to JuicePass Proxy. Do not enable this if you are using your router to redirect traffic to JuicePass Proxy.
+  enelx_ip:
+    name: EnelX IP
+    description: >-
+      The IP address of the EnelX cloud server. Leave as 127.0.0.1 when Ignore EnelX is enabled so JuicePass Proxy does not attempt to resolve defunct EnelX DNS records.
   juicebox_host:
     name: JuiceBox Host
     description: >-
@@ -39,8 +43,10 @@ configuration:
   experimental:
     name: Experimental
     description: >-
-      Enables additional entities in Home Assistant that are in in development or can be used toward developing the ability to send commands to a JuiceBox.
+      Enables additional entities in Home Assistant that are in development or can be used toward developing the ability to send commands to a JuiceBox.
   debug:
     name: Debug
     description: >-
       If enabled, JuicePass Proxy will show additional log entries that can be helpful for debugging.
+network:
+  "8047/udp": JuiceBox UDP telemetry proxy port
