@@ -3,6 +3,9 @@ name: Deploy
 
 on:
   workflow_dispatch:
+  release:
+    types:
+      - published
 
 permissions:
   contents: read
@@ -14,42 +17,39 @@ jobs:
     outputs:
       architectures: ${{ steps.info.outputs.architectures }}
       build_matrix: ${{ steps.matrix.outputs.matrix }}
-      image_name: ${{ steps.normalize.outputs.image_name }}
-      name: ${{ steps.normalize.outputs.name }}
-      description: ${{ steps.normalize.outputs.description }}
-      url: ${{ steps.normalize.outputs.url }}
-      registry_prefix: ${{ steps.normalize.outputs.registry_prefix }}
-      version: ${{ steps.normalize.outputs.version }}
+      image_name: ${{ steps.info.outputs.image_name }}
+      name: ${{ steps.info.outputs.name }}
+      description: ${{ steps.info.outputs.description }}
+      url: ${{ steps.info.outputs.url }}
+      registry_prefix: ${{ steps.info.outputs.registry_prefix }}
+      version: ${{ steps.info.outputs.version }}
     steps:
       - uses: actions/checkout@v7
-      - name: Get information
+      - name: Read app metadata
         id: info
-        uses: home-assistant/actions/helpers/info@master
-        with:
-          path: "./src"
-      - name: Normalize app information
-        id: normalize
         run: |
-          image=${{ steps.info.outputs.image }}
-          echo "image_name=${image##*/}" >> "$GITHUB_OUTPUT"
-          echo "registry_prefix=${image%/*}" >> "$GITHUB_OUTPUT"
-          version=${{ steps.info.outputs.version }}
-          echo "version=${version}" >> "$GITHUB_OUTPUT"
-          name=${{ steps.info.outputs.name }}
-          echo "name=${name}" >> "$GITHUB_OUTPUT"
-          description=${{ steps.info.outputs.description }}
-          echo "description=${description}" >> "$GITHUB_OUTPUT"
-          url=${{ steps.info.outputs.url }}
-          if [[ -n "$url" && "$url" != "null" ]]; then
-            echo "url=${url}" >> "$GITHUB_OUTPUT"
-          fi
+          image="$(yq -r '.image' ./src/config.yaml)"
+          {
+            echo "architectures=$(yq -o=json -I=0 '.arch' ./src/config.yaml)"
+            echo "image_name=${image##*/}"
+            echo "registry_prefix=${image%/*}"
+            echo "version=$(yq -r '.version' ./src/config.yaml)"
+            echo "name=$(yq -r '.name' ./src/config.yaml)"
+            echo "description<<EOF"
+            yq -r '.description' ./src/config.yaml
+            echo "EOF"
+            url="$(yq -r '.url // ""' ./src/config.yaml)"
+            if [[ -n "${url}" ]]; then
+              echo "url=${url}"
+            fi
+          } >> "$GITHUB_OUTPUT"
       - name: Get build matrix
         id: matrix
         uses: home-assistant/builder/actions/prepare-multi-arch-matrix@2026.09.0
         with:
           architectures: ${{ steps.info.outputs.architectures }}
-          image-name: ${{ steps.normalize.outputs.image_name }}
-          registry-prefix: ${{ steps.normalize.outputs.registry_prefix }}
+          image-name: ${{ steps.info.outputs.image_name }}
+          registry-prefix: ${{ steps.info.outputs.registry_prefix }}
 
   build:
     name: Build ${{ matrix.arch }} image
