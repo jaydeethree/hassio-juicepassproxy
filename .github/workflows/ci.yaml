@@ -1,0 +1,85 @@
+---
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint app configuration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Run Home Assistant Add-on Linter
+        uses: frenck/action-addon-linter@v2
+        with:
+          path: "./src"
+          community: "false"
+
+  prepare:
+    name: Initialize test build
+    runs-on: ubuntu-latest
+    outputs:
+      build_matrix: ${{ steps.matrix.outputs.matrix }}
+      name: ${{ steps.info.outputs.name }}
+      description: ${{ steps.info.outputs.description }}
+      url: ${{ steps.info.outputs.url }}
+      version: ${{ steps.info.outputs.version }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Read app metadata
+        id: info
+        run: |
+          image="$(yq -r '.image' ./src/config.yaml)"
+          {
+            echo "architectures=$(yq -o=json -I=0 '.arch' ./src/config.yaml)"
+            echo "image_name=${image##*/}"
+            echo "registry_prefix=${image%/*}"
+            echo "version=$(yq -r '.version' ./src/config.yaml)"
+            echo "name=$(yq -r '.name' ./src/config.yaml)"
+            echo "description<<EOF"
+            yq -r '.description' ./src/config.yaml
+            echo "EOF"
+            url="$(yq -r '.url // ""' ./src/config.yaml)"
+            if [[ -n "${url}" ]]; then
+              echo "url=${url}"
+            fi
+          } >> "$GITHUB_OUTPUT"
+      - name: Get build matrix
+        id: matrix
+        uses: home-assistant/builder/actions/prepare-multi-arch-matrix@2026.09.0
+        with:
+          architectures: ${{ steps.info.outputs.architectures }}
+          image-name: ${{ steps.info.outputs.image_name }}
+          registry-prefix: ${{ steps.info.outputs.registry_prefix }}
+
+  build:
+    name: Test build ${{ matrix.arch }} image
+    needs: prepare
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.prepare.outputs.build_matrix) }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build image (no push)
+        uses: home-assistant/builder/actions/build-image@2026.09.0
+        with:
+          arch: ${{ matrix.arch }}
+          container-registry-password: ${{ secrets.GITHUB_TOKEN }}
+          context: ./src
+          image: ${{ matrix.image }}
+          image-tags: latest
+          labels: |
+            io.hass.type=addon
+            io.hass.name=${{ needs.prepare.outputs.name }}
+            io.hass.description=${{ needs.prepare.outputs.description }}
+            ${{ needs.prepare.outputs.url && format('io.hass.url={0}', needs.prepare.outputs.url) || '' }}
+          push: "false"
+          version: ${{ needs.prepare.outputs.version }}
