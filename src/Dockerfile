@@ -4,8 +4,7 @@ SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
 ARG JPP_VERSION=0.5.1
 ARG JPP_SHA256=801507ea668286a750faddd258341461a8c7971ebc89894c46a4dee089263d0e
-ENV DEBUG=false \
-    LOG_LOC=none
+ENV LOG_LOC=none
 
 RUN mkdir -p /juicepassproxy \
     && ln -s /data /config \
