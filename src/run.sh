@@ -36,7 +36,7 @@ if bashio::config.true 'update_udpc'; then
 fi
 
 if ! bashio::config.true 'ignore_enelx' && [[ "${ENELX_IP}" == "127.0.0.1" ]]; then
-    bashio::log.warning "ignore_enelx is disabled while enelx_ip is still 127.0.0.1; traffic forwarded to EnelX will go to localhost."
+    bashio::exit.nok "When ignore_enelx is disabled, enelx_ip cannot be 127.0.0.1. Please configure a valid EnelX server IP or enable ignore_enelx."
 fi
 
 if bashio::config.has_value 'juicebox_host'; then
