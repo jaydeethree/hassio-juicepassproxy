@@ -24,7 +24,6 @@ If you are using DNS spoofing or NAT to redirect traffic then the following conf
 * Ignore EnelX: True
 * Update UDPC: False
 * Juicebox ID: The serial number of your Juicebox. If you don't know the serial number you can telnet into your Juicebox on port 2000 and run the command `get email.name_address` to retrieve it. Yes, really - `get email.name_address` is how you get the serial number.
-  * Note: Home Assistant hides this option by default, so you need to enable "Show unused optional configuration options" to see it.
 
 If you use Home Assistant's built-in MQTT broker app (such as Mosquitto), MQTT connection settings are discovered automatically. If you use an external MQTT broker, enable "Show unused optional configuration options" and configure the MQTT options manually.
 

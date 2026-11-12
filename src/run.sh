@@ -38,6 +38,14 @@ if bashio::config.has_value 'jpp_host'; then
     export JPP_HOST="$(bashio::config 'jpp_host')"
 fi
 
+if bashio::config.has_value 'device_name'; then
+    export DEVICE_NAME="$(bashio::config 'device_name')"
+fi
+
+if bashio::config.has_value 'mqtt_discovery_prefix'; then
+    export MQTT_DISCOVERY_PREFIX="$(bashio::config 'mqtt_discovery_prefix')"
+fi
+
 if bashio::config.true 'experimental'; then
     export EXPERIMENTAL="true"
 fi

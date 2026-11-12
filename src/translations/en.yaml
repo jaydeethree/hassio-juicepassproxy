@@ -40,6 +40,14 @@ configuration:
     name: JuiceBox ID
     description: >-
       The serial number of your JuiceBox. If not defined, will attempt to get the JuiceBox ID using telnet. Don't use this if you are testing multiple devices.
+  device_name:
+    name: Device Name
+    description: >-
+      The Home Assistant device name for your JuiceBox (defaults to JuiceBox). Avoid spaces (for example, use Garage_JuiceBox).
+  mqtt_discovery_prefix:
+    name: MQTT Discovery Prefix
+    description: >-
+      The Home Assistant MQTT discovery topic prefix (defaults to homeassistant).
   experimental:
     name: Experimental
     description: >-

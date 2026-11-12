@@ -18,6 +18,7 @@ options:
   ignore_enelx: true
   update_udpc: false
   enelx_ip: "127.0.0.1"
+  juicebox_id: ""
 schema:
   mqtt_host: str?
   mqtt_port: port?
@@ -29,5 +30,7 @@ schema:
   juicebox_host: str?
   juicebox_id: str?
   jpp_host: str?
+  device_name: str?
+  mqtt_discovery_prefix: str?
   experimental: bool?
   debug: bool?
