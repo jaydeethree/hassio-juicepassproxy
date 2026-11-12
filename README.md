@@ -4,7 +4,9 @@ This project is **NOT** affiliated with JuicePassProxy or the JuiceRescue Organi
 
 # Installing the app
 
-You will need to add this repository to Home Assistant to install this app. Here's how to do that:
+[![Open your Home Assistant instance and show the add app repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fjaydeethree%2Fhassio-juicepassproxy)
+
+Or manually add this repository to Home Assistant to install this app:
 
 * Go to Settings > Apps > Install App in Home Assistant
 * Open the menu (three dots in the upper-right) and choose "Repositories"
