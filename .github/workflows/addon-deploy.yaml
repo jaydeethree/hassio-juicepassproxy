@@ -27,13 +27,24 @@ jobs:
       - uses: actions/checkout@v7
       - name: Read app metadata
         id: info
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: |
+          version="$(yq -r '.version' ./src/config.yaml)"
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" && "${GITHUB_REF}" != "refs/heads/main" ]]; then
+            echo "::error::Manual deployments via workflow_dispatch must run from refs/heads/main (got '${GITHUB_REF}')."
+            exit 1
+          fi
+          if [[ "${GITHUB_EVENT_NAME}" == "release" && "${RELEASE_TAG}" != "${version}" ]]; then
+            echo "::error::Release tag '${RELEASE_TAG}' does not match config.yaml version '${version}'."
+            exit 1
+          fi
           image="$(yq -r '.image' ./src/config.yaml)"
           {
             echo "architectures=$(yq -o=json -I=0 '.arch' ./src/config.yaml)"
             echo "image_name=${image##*/}"
             echo "registry_prefix=${image%/*}"
-            echo "version=$(yq -r '.version' ./src/config.yaml)"
+            echo "version=${version}"
             echo "name=$(yq -r '.name' ./src/config.yaml)"
             echo "description<<EOF"
             yq -r '.description' ./src/config.yaml
