@@ -12,3 +12,9 @@ updates:
       interval: "weekly"
     labels:
       - "dependency-update"
+    ignore:
+      # Upstream JuicePassProxy v0.5.1 pins ha-mqtt-discoverable==0.13.1 (Pydantic v1),
+      # which is incompatible with Python 3.14+.
+      - dependency-name: "*base-python*"
+        versions:
+          - ">= 3.14"
