@@ -1,3 +1,5 @@
+# Keep Python on 3.13: upstream JuicePassProxy v0.5.1 pins ha-mqtt-discoverable==0.13.1,
+# which requires Pydantic v1 (<2.0.0) and is incompatible with Python 3.14+.
 FROM ghcr.io/home-assistant/base-python:3.13-alpine3.22-2026.10.0
 
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
