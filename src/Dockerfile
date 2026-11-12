@@ -1,4 +1,4 @@
-FROM ghcr.io/home-assistant/base-python:3.13-alpine3.22-2026.10.0
+FROM ghcr.io/home-assistant/base-python:3.14-alpine3.22-2026.10.0
 
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
