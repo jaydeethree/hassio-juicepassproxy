@@ -21,6 +21,8 @@ jobs:
         with:
           path: "./src"
           community: "false"
+      - name: Run ShellCheck
+        run: shellcheck --shell=bash ./src/run.sh
 
   prepare:
     name: Initialize test build
