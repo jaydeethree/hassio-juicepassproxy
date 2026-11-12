@@ -3,19 +3,19 @@ configuration:
   mqtt_host:
     name: MQTT Host
     description: >-
-      The IP address of your MQTT server.
+      The IP address or hostname of your MQTT server. Leave blank to auto-discover Home Assistant's internal MQTT broker (such as Mosquitto).
   mqtt_port:
     name: MQTT Port
     description: >-
-      The port that your MQTT server listens on.
+      The port that your MQTT server listens on (defaults to 1883 when MQTT Host is set; auto-discovered otherwise).
   mqtt_username:
     name: MQTT Username
     description: >-
-      Your MQTT username.
+      Your MQTT username (optional; auto-discovered when using Home Assistant's internal MQTT broker).
   mqtt_password:
     name: MQTT Password
     description: >-
-      Your MQTT password.
+      Your MQTT password (optional; auto-discovered when using Home Assistant's internal MQTT broker).
   ignore_enelx:
     name: Ignore EnelX
     description: >-

@@ -13,20 +13,16 @@ arch:
 discovery:
   - mqtt
 services:
-  - "mqtt:need"
+  - "mqtt:want"
 options:
-  mqtt_host: ""
-  mqtt_port: 1883
-  mqtt_username: ""
-  mqtt_password: ""
   ignore_enelx: true
   update_udpc: false
   enelx_ip: "127.0.0.1"
 schema:
-  mqtt_host: str
-  mqtt_port: port
-  mqtt_username: str
-  mqtt_password: password
+  mqtt_host: str?
+  mqtt_port: port?
+  mqtt_username: str?
+  mqtt_password: password?
   ignore_enelx: bool
   update_udpc: bool
   enelx_ip: str
