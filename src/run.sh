@@ -1,9 +1,27 @@
 #!/usr/bin/env bashio
 
-export MQTT_HOST="$(bashio::config 'mqtt_host')"
-export MQTT_PORT="$(bashio::config 'mqtt_port')"
-export MQTT_USER="$(bashio::config 'mqtt_username')"
-export MQTT_PASS="$(bashio::config 'mqtt_password')"
+if bashio::config.has_value 'mqtt_host'; then
+    export MQTT_HOST="$(bashio::config 'mqtt_host')"
+    if bashio::config.has_value 'mqtt_port'; then
+        export MQTT_PORT="$(bashio::config 'mqtt_port')"
+    else
+        export MQTT_PORT="1883"
+    fi
+    if bashio::config.has_value 'mqtt_username'; then
+        export MQTT_USER="$(bashio::config 'mqtt_username')"
+    fi
+    if bashio::config.has_value 'mqtt_password'; then
+        export MQTT_PASS="$(bashio::config 'mqtt_password')"
+    fi
+elif bashio::services.available 'mqtt'; then
+    bashio::log.info "Auto-discovering MQTT broker settings from Home Assistant..."
+    export MQTT_HOST="$(bashio::services mqtt 'host')"
+    export MQTT_PORT="$(bashio::services mqtt 'port')"
+    export MQTT_USER="$(bashio::services mqtt 'username')"
+    export MQTT_PASS="$(bashio::services mqtt 'password')"
+else
+    bashio::exit.nok "No MQTT broker configured and no Home Assistant MQTT service found. Please configure mqtt_host or install an MQTT broker app (such as Mosquitto)."
+fi
 export IGNORE_ENELX="$(bashio::config 'ignore_enelx')"
 export ENELX_IP="$(bashio::config 'enelx_ip')"
 export UPDATE_UDPC="$(bashio::config 'update_udpc')"
