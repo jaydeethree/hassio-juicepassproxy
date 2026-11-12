@@ -48,4 +48,4 @@ else
     export DEBUG="false"
 fi
 
-/juicepassproxy/docker_entrypoint.sh
+exec /juicepassproxy/docker_entrypoint.sh

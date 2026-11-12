@@ -18,4 +18,4 @@ RUN mkdir -p /juicepassproxy \
 
 COPY --chmod=755 run.sh /run.sh
 
-ENTRYPOINT /run.sh
+ENTRYPOINT ["/run.sh"]
