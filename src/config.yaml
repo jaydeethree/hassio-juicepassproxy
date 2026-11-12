@@ -6,12 +6,9 @@ url: "https://github.com/jaydeethree/hassio-juicepassproxy"
 image: "ghcr.io/jaydeethree/hassio-juicepassproxy"
 ports:
   "8047/udp": 8047
-panel_icon: mdi:ev-station
 arch:
   - aarch64
   - amd64
-discovery:
-  - mqtt
 services:
   - "mqtt:want"
 options:
