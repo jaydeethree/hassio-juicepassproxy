@@ -29,5 +29,7 @@ schema:
   juicebox_host: str?
   juicebox_id: str?
   jpp_host: str?
+  device_name: str?
+  mqtt_discovery_prefix: str?
   experimental: bool?
   debug: bool?
