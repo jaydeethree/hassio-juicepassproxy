@@ -1,3 +1,15 @@
+## Unreleased
+- Auto-discover Home Assistant's internal MQTT broker (such as Mosquitto) when mqtt_host is not configured, and make MQTT options optional so unauthenticated and external brokers are supported
+- Fix some configuration fields passing literal "null" string to JuicePassProxy
+- Persist juicepassproxy.yaml in Home Assistant's /data volume across restarts and updates
+- Disable duplicate file logging inside the container since Home Assistant already captures stdout/stderr
+- Clean up and consolidate Dockerfile layers
+- Improve container stop/restart signal handling (SIGTERM forwarding)
+- Expose optional device_name and mqtt_discovery_prefix configuration options
+- Add missing UI translation for enelx_ip, add network port description for 8047/udp, and fix minor description typos
+- Add in-app README.md / DOCS.md links and url metadata
+- Various CI improvements
+
 ## 0.5.1.16
 - Hotfix release for https://github.com/jaydeethree/hassio-juicepassproxy/issues/20
 
