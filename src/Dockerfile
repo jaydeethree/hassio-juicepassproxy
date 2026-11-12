@@ -8,7 +8,6 @@ ENV DEBUG=false \
 
 RUN mkdir -p /juicepassproxy \
     && ln -s /data /config \
-    && apk add --no-cache py3-pip \
     && curl -fsSL -o /tmp/jpp.tar.gz \
         "https://github.com/JuiceRescue/juicepassproxy/archive/refs/tags/v${JPP_VERSION}.tar.gz" \
     && tar xzf /tmp/jpp.tar.gz --strip 1 -C /juicepassproxy \
