@@ -14,6 +14,9 @@ if bashio::config.has_value 'mqtt_host'; then
         export MQTT_PASS="$(bashio::config 'mqtt_password')"
     fi
 elif bashio::services.available 'mqtt'; then
+    if bashio::config.has_value 'mqtt_port' || bashio::config.has_value 'mqtt_username' || bashio::config.has_value 'mqtt_password'; then
+        bashio::log.warning "mqtt_port, mqtt_username, or mqtt_password is set without mqtt_host; ignoring them and using Home Assistant MQTT auto-discovery instead."
+    fi
     bashio::log.info "Auto-discovering MQTT broker settings from Home Assistant..."
     export MQTT_HOST="$(bashio::services mqtt 'host')"
     export MQTT_PORT="$(bashio::services mqtt 'port')"
@@ -25,6 +28,16 @@ fi
 export IGNORE_ENELX="$(bashio::config 'ignore_enelx')"
 export ENELX_IP="$(bashio::config 'enelx_ip')"
 export UPDATE_UDPC="$(bashio::config 'update_udpc')"
+
+if bashio::config.true 'update_udpc'; then
+    if ! bashio::config.has_value 'juicebox_host' || ! bashio::config.has_value 'jpp_host'; then
+        bashio::exit.nok "When update_udpc is enabled, both juicebox_host and jpp_host must be configured."
+    fi
+fi
+
+if ! bashio::config.true 'ignore_enelx' && [[ "${ENELX_IP}" == "127.0.0.1" ]]; then
+    bashio::log.warning "ignore_enelx is disabled while enelx_ip is still 127.0.0.1; traffic forwarded to EnelX will go to localhost."
+fi
 
 if bashio::config.has_value 'juicebox_host'; then
     export JUICEBOX_HOST="$(bashio::config 'juicebox_host')"
