@@ -1,4 +1,4 @@
-## Unreleased
+## 0.5.1.17
 - Auto-discover Home Assistant's internal MQTT broker (such as Mosquitto) when mqtt_host is not configured, and make MQTT options optional so unauthenticated and external brokers are supported
 - Various clean-up: consolidate Dockerfile layers, disable duplicate file logging inside the container, remove unneeded packages inside the container, and more
 - Fix some configuration fields passing literal "null" string to JuicePassProxy
